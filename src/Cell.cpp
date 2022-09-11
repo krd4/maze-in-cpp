@@ -1,12 +1,12 @@
 #include "util.cpp"
-#include <map>
+#include <unordered_map>
 #include <vector>
 
 
 class Cell {
 public:
     int row, col, mrow, mcol, id;
-    std::map<int, int> links;
+    std::unordered_map<int, int> links;
     Cell(int row, int col, int mrow, int mcol) {
         this->row = row;
         this->col = col;
@@ -23,5 +23,9 @@ public:
     void unlink(Cell& cell, bool bidi=false) {
         links.erase(cell.id);
         if(bidi) cell.unlink(*this, false);
+    }
+
+    std::vector<int> getLinks() {
+        return keys(links);
     }
 };
