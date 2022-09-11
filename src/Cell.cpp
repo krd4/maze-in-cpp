@@ -28,4 +28,8 @@ public:
     std::vector<int> getLinks() {
         return keys(links);
     }
+
+    bool linked(Cell cell) {
+        return links.find(cell.id) != links.end();
+    }
 };
