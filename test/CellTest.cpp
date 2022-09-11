@@ -46,4 +46,15 @@ TEST(Cell, RetrievingKeys) {
     ASSERT_TRUE(cell1.getLinks() == links);
 }
 
+TEST(Cell, CheckIfLinked) {
+    Cell cell1(4, 4, 8, 8);
+    Cell cell2(4, 3, 8, 8);
+    Cell cell3(3, 4, 8, 8);
 
+    cell1.link(cell2, false);
+    cell1.link(cell3, true);
+
+    ASSERT_TRUE(cell1.linked(cell2));
+    ASSERT_FALSE(cell2.linked(cell1));
+    ASSERT_TRUE(cell1.linked(cell3));
+}
