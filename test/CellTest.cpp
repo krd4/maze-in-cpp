@@ -4,12 +4,17 @@
 
 TEST(Cell, CellInstantiation) {
     Cell cell(4, 4, 8, 8);
+    cell.set_neighbors(1, 2, 3, 4);
     ASSERT_TRUE(cell.row == 4);
     ASSERT_TRUE(cell.col == 4);
     ASSERT_TRUE(cell.mrow == 8);
     ASSERT_TRUE(cell.mcol == 8);
     ASSERT_TRUE(cell.id == 4*8 + 4);
     ASSERT_TRUE(cell.links.size() == 0);
+    ASSERT_TRUE(cell.north == 1);
+    ASSERT_TRUE(cell.south == 2);
+    ASSERT_TRUE(cell.east == 3);
+    ASSERT_TRUE(cell.west == 4);
 }
 
 TEST(Cell, CellLinking) {
