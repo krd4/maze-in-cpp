@@ -32,4 +32,6 @@ public:
     bool linked(Cell cell) {
         return links.find(cell.id) != links.end();
     }
+
+    
 };
