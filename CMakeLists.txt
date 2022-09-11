@@ -17,3 +17,13 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
+
+add_executable(
+    cell_test
+    test/CellTest.cpp
+)
+
+target_link_libraries(
+    cell_test
+    gmock_main
+)
