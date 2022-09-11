@@ -5,6 +5,7 @@
 
 class Cell {
 public:
+    Cell *north, *south, *east, *west; 
     int row, col, mrow, mcol, id;
     std::unordered_map<int, int> links;
     Cell(int row, int col, int mrow, int mcol) {
@@ -33,5 +34,10 @@ public:
         return links.find(cell.id) != links.end();
     }
 
-    
+    void set_neighbors(Cell& north, Cell& south, Cell& east, Cell& west) {
+        this->north = &north;
+        this->south = &south;
+        this->east = &east;
+        this->west = &west;
+    }
 };

@@ -4,17 +4,12 @@
 
 TEST(Cell, CellInstantiation) {
     Cell cell(4, 4, 8, 8);
-    cell.set_neighbors(1, 2, 3, 4);
-    ASSERT_TRUE(cell.row == 4);
-    ASSERT_TRUE(cell.col == 4);
-    ASSERT_TRUE(cell.mrow == 8);
-    ASSERT_TRUE(cell.mcol == 8);
-    ASSERT_TRUE(cell.id == 4*8 + 4);
-    ASSERT_TRUE(cell.links.size() == 0);
-    ASSERT_TRUE(cell.north == 1);
-    ASSERT_TRUE(cell.south == 2);
-    ASSERT_TRUE(cell.east == 3);
-    ASSERT_TRUE(cell.west == 4);
+    EXPECT_TRUE(cell.row == 4);
+    EXPECT_TRUE(cell.col == 4);
+    EXPECT_TRUE(cell.mrow == 8);
+    EXPECT_TRUE(cell.mcol == 8);
+    EXPECT_TRUE(cell.id == 4*8 + 4);
+    EXPECT_TRUE(cell.links.size() == 0);
 }
 
 TEST(Cell, CellLinking) {
@@ -25,17 +20,17 @@ TEST(Cell, CellLinking) {
     cell1.link(cell2, false);
     cell1.link(cell3, true);
     
-    ASSERT_TRUE(cell1.links[cell2.id]);
-    ASSERT_FALSE(cell2.links[cell2.id]);
-    ASSERT_TRUE(cell1.links[cell3.id]);
-    ASSERT_TRUE(cell3.links[cell1.id]);
+    EXPECT_TRUE(cell1.links[cell2.id]);
+    EXPECT_FALSE(cell2.links[cell2.id]);
+    EXPECT_TRUE(cell1.links[cell3.id]);
+    EXPECT_TRUE(cell3.links[cell1.id]);
 
     cell1.unlink(cell2, false);
     cell1.unlink(cell3, true);
 
-    ASSERT_FALSE(cell1.links[cell2.id]);
-    ASSERT_FALSE(cell1.links[cell3.id]);
-    ASSERT_FALSE(cell3.links[cell1.id]);
+    EXPECT_FALSE(cell1.links[cell2.id]);
+    EXPECT_FALSE(cell1.links[cell3.id]);
+    EXPECT_FALSE(cell3.links[cell1.id]);
 }
 
 TEST(Cell, RetrievingKeys) {
@@ -48,7 +43,7 @@ TEST(Cell, RetrievingKeys) {
 
     std::vector<int> links = {cell2.id, cell3.id};
 
-    ASSERT_TRUE(cell1.getLinks() == links);
+    EXPECT_TRUE(cell1.getLinks() == links);
 }
 
 TEST(Cell, CheckIfLinked) {
@@ -59,7 +54,21 @@ TEST(Cell, CheckIfLinked) {
     cell1.link(cell2, false);
     cell1.link(cell3, true);
 
-    ASSERT_TRUE(cell1.linked(cell2));
-    ASSERT_FALSE(cell2.linked(cell1));
-    ASSERT_TRUE(cell1.linked(cell3));
+    EXPECT_TRUE(cell1.linked(cell2));
+    EXPECT_FALSE(cell2.linked(cell1));
+    EXPECT_TRUE(cell1.linked(cell3));
+}
+
+TEST(Cell, Neighborhoods) {
+    Cell cell(4, 4, 8, 8);
+    Cell north(1,1,1,1);
+    Cell south(2,2,2,2);
+    Cell east(3,3,3,3);
+    Cell west(4,4,4,4);
+    cell.set_neighbors(north, south, east, west);
+
+    EXPECT_EQ(cell.north, &north);
+    EXPECT_EQ(cell.south, &south);
+    EXPECT_EQ(cell.east, &east);
+    EXPECT_EQ(cell.west, &west);
 }
