@@ -1,5 +1,5 @@
-#include <vector>
 #include <gmock/gmock.h>
+#include <vector>
 #include "../src/Cell.cpp"
 
 TEST(Cell, CellInstantiation) {
@@ -34,7 +34,3 @@ TEST(Cell, CellLinking) {
 }
 
 
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS(); 
-}
