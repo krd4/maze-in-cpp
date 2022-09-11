@@ -33,4 +33,17 @@ TEST(Cell, CellLinking) {
     ASSERT_FALSE(cell3.links[cell1.id]);
 }
 
+TEST(Cell, RetrievingKeys) {
+    Cell cell1(4, 4, 8, 8);
+    Cell cell2(4, 3, 8, 8);
+    Cell cell3(3, 4, 8, 8);
+
+    cell1.link(cell2, false);
+    cell1.link(cell3, true);
+
+    std::vector<int> links = {cell2.id, cell3.id};
+
+    ASSERT_TRUE(cell1.getLinks() == links);
+}
+
 
