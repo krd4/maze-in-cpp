@@ -1,3 +1,4 @@
+#pragma once
 #include "util.cpp"
 #include <unordered_map>
 #include <vector>
@@ -8,6 +9,7 @@ public:
     Cell *north, *south, *east, *west; 
     int row, col, mrow, mcol, id;
     std::unordered_map<int, int> links;
+    Cell() {}
     Cell(int row, int col, int mrow, int mcol) {
         this->row = row;
         this->col = col;
@@ -39,5 +41,12 @@ public:
         this->south = &south;
         this->east = &east;
         this->west = &west;
+    }
+
+    void set_neighbors(Cell* north, Cell* south, Cell* east, Cell* west) {
+        this->north = north;
+        this->south = south;
+        this->east = east;
+        this->west = west;
     }
 };
